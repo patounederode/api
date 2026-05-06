@@ -1,46 +1,44 @@
-# Astro Starter Kit: Basics
+# Week 1
+## wo 1 april
+Eerste idee:
+Een film app met MovieDB API en gebruik Page Transition en Web Share API
 
-```sh
-npm create astro@latest -- --template basics
-```
+## Do 2 april
+Voortganggesprek
+Mijn idee bleek te simpel en te saai, nieuw idee bedenken.
+Waarschijnlijk iets met kunst/rijksmuseum
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Vrij 3 april
+Goede vrijdag
 
-## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+# Week 2
+## wo 8 april
+Ziek
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## do 9 april
+Ziek
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## vrij 10 april
+Ziek - geen voortgang
 
-## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+# WEEK 3
+## wo 15 april
+Nieuwe idee, kunst api ophalen, favorieten pagina en detail pagina.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Ik had geprobeerd de api van het rijksmuseum op te halen, deze werkte helaas niet meer.
+Ik heb inplaats daarvan kunstwerken van artic.edu opgehaald. Ook heb ik een pagina aangemaakt waarin je favorieten kunt opslaan. Met hulp van chatgpt.
 
-## 👀 Want to learn more?
+## do 16 april
+Styling grid gedaan
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Vrij 17 april
+The web you want
+Verslag:
+
+
+# WEEk 4
+
+## Wo 22 april
+Werk besproken, mijn idee moet nog aangepast worden, creatief, hulp gekregen met code. Ik loop nog achter, ik ga ook hulp vragen aan andere studenten.
