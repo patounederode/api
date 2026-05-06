@@ -1,0 +1,66 @@
+---
+---
+<meta charset="UTF-8" />
+<h1>Mijn Favorieten </h1>
+
+<a href="/">← Terug</a>
+
+<ul id="favorites-list"></ul>
+
+<script>
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  const list = document.getElementById("favorites-list");
+
+  if (favorites.length === 0) {
+    list.innerHTML = "<p>Je hebt nog geen favorieten.</p>";
+  } 
+
+  else {
+    favorites.forEach((art) => {
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+        <h2>${art.title}</h2>
+        ${art.image ? `<img src="https://www.artic.edu/iiif/2/${art.image}/full/300,/0/default.jpg" />` : ""}
+      `;
+
+      list.appendChild(li);
+    });
+  }
+
+</script>
+
+
+<style>
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-self: center;
+  }
+  
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  img {
+    width: 80%;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    ul {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

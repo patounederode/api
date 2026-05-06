@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+	<body>
+		<header>
+			<a href="/detail">Bekijk kunstwerk</a>
+<a href="/favorites">Ga naar favorieten</a>
+		</header>
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+
+	h1 {
+		font-family: Arial, Helvetica, sans-serif;
+		display: flex;
+		justify-self: center;
+	}
+
+  ul {
+	font-size: 0.8em;
+	font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+
+  button {
+	display: flex;
+	justify-self: center;
+    padding:1em;
+	border-radius: 1em;
+	background-color: #ff83c5;
+	border: none;
+	margin-top: 1em;
+    cursor: pointer;
+  }
+
+</style>
