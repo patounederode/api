@@ -2,7 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/src/styles/global.css" />
+
   <h1>Create Artwork</h1>
   <a href="/">← Back</a>
 
@@ -21,6 +23,7 @@ import Layout from '../layouts/Layout.astro';
     <button onclick="clearCanvas()" class="deletebtn">Delete</button> 
 
   </div>
+
 <script>
   window.onload = function () {
     // window.onload = functie die pas start wanneer de hele pagina klaar is met laden
@@ -118,10 +121,48 @@ import Layout from '../layouts/Layout.astro';
   };
 </script>
 
-</Layout>
+
 
 <style>
-  
+  @font-face {
+  font-family: 'Playfair';
+  src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Red';
+  src: url('/fonts/Redhatdisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Script';
+  src: url('/fonts/ImperialScript-Regular.ttf');
+}
+
+  input[type="color"] {
+    font-family: 'Red';
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+}
+
+input[type="range"] {
+padding: 2em;
+}
+
+/* kleur/grootte aligned */
+input[type="color"],
+input[type="range"],
+#sizeValue {
+  vertical-align: middle;
+
+}
+
+
   .deletebtn {
     margin-left: 10px;
     padding: 5px 10px;
@@ -130,6 +171,10 @@ import Layout from '../layouts/Layout.astro';
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+margin:2em;
 
   }
   .deletebtn:hover {

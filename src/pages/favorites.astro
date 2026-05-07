@@ -4,7 +4,6 @@ import Layout from "../layouts/Layout.astro"
 
 <meta charset="UTF-8">
 
-<Layout>
   <h1>My Favorites</h1>
   <a href="/">← Back</a>
 
@@ -31,7 +30,7 @@ import Layout from "../layouts/Layout.astro"
     // Check of er geen favorieten zijn
     if (favorites.length === 0) {
       // innerHTML = tekst/HTML in een element zetten
-list.innerHTML = "<p>You have no favorites yet.</p>";
+    list.innerHTML = "<p>You have no favorites yet.</p>";
       return; // stop de functie hier
     }
 
@@ -44,23 +43,23 @@ list.innerHTML = "<p>You have no favorites yet.</p>";
 
       // Zet inhoud in het <li>
       // ${...} = template literal (variabelen in tekst plaatsen)
-      li.innerHTML = `
-        <h2>${art.title}</h2>
+ li.innerHTML = `
+  <h2>${art.title}</h2>
 
-        ${
-          // Als er een afbeelding is, toon die
-          // ? = "als dit waar is"
-          // : = "anders"
-          art.image
-            ? `<img src="https://www.artic.edu/iiif/2/${art.image}/full/300,/0/default.jpg" />`
-            : ""
-        }
+  ${
+    art.image
+      ? `
+        <a href="https://www.artic.edu/artworks/${art.id}" target="_blank" rel="noopener noreferrer">
+          <img src="https://www.artic.edu/iiif/2/${art.image}/full/300,/0/default.jpg" />
+        </a>
+      `
+      : ""
+  }
 
-        <br />
+  <br />
 
-        <!-- Knop om dit specifieke item te verwijderen -->
-        <button id="delete-${index}">Verwijder</button>
-      `;
+  <button id="delete-${index}">Verwijder</button>
+`;
 
       // Voeg het <li> toe aan de lijst op de pagina
       list.appendChild(li);
@@ -89,3 +88,80 @@ list.innerHTML = "<p>You have no favorites yet.</p>";
   // Eerste keer dat de pagina laadt, toon de favorieten
   renderFavorites();
 </script>
+
+
+<style>
+
+@font-face {
+  font-family: 'Playfair';
+  src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Red';
+  src: url('/fonts/Redhatdisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Script';
+  src: url('/fonts/ImperialScript-Regular.ttf');
+}
+
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+    font-family: 'Red';
+    background-color: #fff9ed;
+    color: rgb(56, 56, 56);
+    text-align: center;
+
+	}
+
+
+	h1 {
+    font-family: 'Playfair', serif;
+		display: flex;
+		justify-self: center;
+    font-size: 2.5em;
+    color: rgb(72, 139, 82);
+	}
+
+ :global(#favorites-list){
+    max-width: 100%;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4em;
+      margin: 2em;
+   padding: 2em;
+   font-size: 0.8em;
+}
+
+ :global(#favorites-list img) {
+  width: 100%;
+  height: auto;
+  border-radius: 1em;
+  object-fit: cover;
+}
+
+ :global(#favorites-list button) {
+    margin-top: 0.5em;
+    padding: 0.5em 1em;
+    background-color: #ff7171;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    background-color: #ff1a1a;
+    }
+  }
+
+</style>
+
+
+

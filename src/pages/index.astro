@@ -25,18 +25,23 @@ const artworks = data.data || [];
     // Voor elk kunstwerk (art) maak je HTML die de titel, afbeelding en een favoriet-knop bevat
 
 <li>
-  {/* <h2>{art.title}</h2> */}
+  <a href={`https://www.artic.edu/artworks/${art.id}`} target="_blank" rel="noopener noreferrer">
 
-  {art.image_id && (
-    // de unieke ID die nodig is om de afbeelding op te halen
-    // && → alleen als art.image_id bestaat (anders niks tonen)
-    <img 
-      src={`https://www.artic.edu/iiif/2/${art.image_id}/full/300,/0/default.jpg`} 
-      alt={art.title} 
-    />
-  )}
+    {art.image_id && (
+      <img 
+        src={`https://www.artic.edu/iiif/2/${art.image_id}/full/300,/0/default.jpg`} 
+        alt={art.title} 
+      />
+    )}
 
-  <button class="fav-btn" data-id={art.id} data-title={art.title} data-image={art.image_id}>
+  </a>
+
+  <button 
+    class="fav-btn" 
+    data-id={art.id} 
+    data-title={art.title} 
+    data-image={art.image_id}
+  >
   </button>
 </li>
 
@@ -116,15 +121,14 @@ const artworks = data.data || [];
 
 <style>
 
-  @font-face {
+@font-face {
   font-family: 'Playfair';
   src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
 }
 
 @font-face {
   font-family: 'Red';
-  src: url(/fonts/Redhatdisplay-VariableFont_wght.ttf);
-
+  src: url('/fonts/Redhatdisplay-VariableFont_wght.ttf');
 }
 
 @font-face {
@@ -132,13 +136,15 @@ const artworks = data.data || [];
   src: url('/fonts/ImperialScript-Regular.ttf');
 }
 
+
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
     font-family: 'Red';
     background-color: #fff9ed;
-    color: rgb(56, 56, 56);
+    color: #383838;
+    
     text-align: center;
 
 	}
