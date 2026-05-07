@@ -1,49 +1,43 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "../layouts/Layout.astro";
 ---
 
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 
-  <h1>My Favorites</h1>
-  <a href="/">← Back</a>
+<h1>My Favorites</h1>
+<a href="/">← Back</a>
 
-  <!-- Hier komt de lijst met favorieten -->
-  <ul id="favorites-list"></ul>
+<!-- Hier komt de lijst met favorieten -->
+<ul id="favorites-list"></ul>
+
+
+
 
 
 <script>
   // Haal favorieten op uit localStorage
-  // localStorage bewaart data in de browser (blijft bestaan na refresh)
-  // JSON.parse zet de tekst terug om naar een echte JavaScript array
-  // || [] betekent: als er niks bestaat, gebruik een lege array
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-  // Pak het HTML-element waar we de lijst in gaan zetten
+  // Pakt het HTML-element de lijst wordt ingezet
   const list = document.getElementById("favorites-list");
 
-  // Functie om de hele lijst opnieuw te tekenen
-  // Dit gebruiken we ook na het verwijderen van een item
+  // Favorieten tonen op de pagina
   function renderFavorites() {
-    // Maak de lijst leeg voordat we opnieuw gaan tekenen
     list.innerHTML = "";
 
     // Check of er geen favorieten zijn
     if (favorites.length === 0) {
-      // innerHTML = tekst/HTML in een element zetten
-    list.innerHTML = "<p>You have no favorites yet.</p>";
-      return; // stop de functie hier
+      list.innerHTML = "<p>You have no favorites yet.</p>";
+      return;
     }
 
-    // Loop door alle favorieten heen
+    // Loop door alle favorieten heen, art = favoriet item, index = nummer in de lijst
     favorites.forEach((art, index) => {
-      // index = positie in de array (0, 1, 2, ...)
-
       // Maak een nieuw list-item (<li>) aan
       const li = document.createElement("li");
 
       // Zet inhoud in het <li>
-      // ${...} = template literal (variabelen in tekst plaatsen)
- li.innerHTML = `
+      li.innerHTML = `
   <h2>${art.title}</h2>
 
   ${
@@ -61,92 +55,100 @@ import Layout from "../layouts/Layout.astro"
   <button id="delete-${index}">Verwijder</button>
 `;
 
-      // Voeg het <li> toe aan de lijst op de pagina
+      // Zet het item op de pagina
       list.appendChild(li);
 
-      // Pak de knop die net is aangemaakt
       const btn = document.getElementById(`delete-${index}`);
 
-      // Wanneer je op de knop klikt
+      // Als je op de knop klikt:
       btn.addEventListener("click", () => {
-
-        // splice = verwijder items uit een array
-        // syntax: array.splice(startIndex, aantal)
-        // hier: verwijder 1 item op positie "index"
+        // Verwijder 1 item op deze plek
         favorites.splice(index, 1);
 
-        // Sla de aangepaste array opnieuw op in localStorage
-        // JSON.stringify zet de array om naar tekst (want localStorage kan alleen tekst opslaan)
+        // Slaat de nieuwe lijst op in localStorage
         localStorage.setItem("favorites", JSON.stringify(favorites));
 
-        // Teken de lijst opnieuw zodat de wijziging zichtbaar is
+        // Laat de lijst opnieuw zien
         renderFavorites();
       });
     });
   }
 
-  // Eerste keer dat de pagina laadt, toon de favorieten
+  // Laat favorieten zien bij het laden van de pagina
   renderFavorites();
 </script>
 
 
+
+
+
+
 <style>
+  @font-face {
+    font-family: "Playfair";
+    src: url("/fonts/PlayfairDisplay-VariableFont_wght.ttf");
+  }
 
-@font-face {
-  font-family: 'Playfair';
-  src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
-}
+  @font-face {
+    font-family: "Red";
+    src: url("/fonts/Redhatdisplay-VariableFont_wght.ttf");
+  }
 
-@font-face {
-  font-family: 'Red';
-  src: url('/fonts/Redhatdisplay-VariableFont_wght.ttf');
-}
+  @font-face {
+    font-family: "Script";
+    src: url("/fonts/ImperialScript-Regular.ttf");
+  }
 
-@font-face {
-  font-family: 'Script';
-  src: url('/fonts/ImperialScript-Regular.ttf');
-}
-
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-    font-family: 'Red';
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Red";
     background-color: #fff9ed;
     color: rgb(56, 56, 56);
     text-align: center;
+  }
 
-	}
-
-
-	h1 {
-    font-family: 'Playfair', serif;
-		display: flex;
-		justify-self: center;
+  a {
+    color: #488b52;
+    &:hover {
+      color: #ff7171;
+      transform: scale(1.1);
+    }
+  }
+  h1 {
+    font-family: "Playfair", serif;
+    display: flex;
+    justify-self: center;
     font-size: 2.5em;
-    color: rgb(72, 139, 82);
-	}
+    color: #488b52;
+  }
 
- :global(#favorites-list){
+  :global(#favorites-list) {
     max-width: 100%;
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4em;
-      margin: 2em;
-   padding: 2em;
-   font-size: 0.8em;
-}
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4em;
+    margin: 2em;
+    padding: 2em;
+    font-size: 0.8em;
+  }
 
- :global(#favorites-list img) {
-  width: 100%;
-  height: auto;
-  border-radius: 1em;
-  object-fit: cover;
-}
+  :global(#favorites-list img) {
+    width: 100%;
+    height: auto;
+    border-radius: 1em;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
 
- :global(#favorites-list button) {
+  :global(#favorites-list a) {
+    color: #488b52;
+  }
+
+  :global(#favorites-list button) {
     margin-top: 0.5em;
     padding: 0.5em 1em;
     background-color: #ff7171;
@@ -154,14 +156,11 @@ import Layout from "../layouts/Layout.astro"
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(201, 124, 93, 0.4);
 
     &:hover {
       transform: scale(1.1);
-    background-color: #ff1a1a;
+      background-color: #ff1a1a;
     }
   }
-
 </style>
-
-
-

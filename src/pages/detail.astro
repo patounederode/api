@@ -1,167 +1,133 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <meta charset="UTF-8" />
 <link rel="stylesheet" href="/src/styles/global.css" />
 
-  <h1>Create Artwork</h1>
-  <a href="/">← Back</a>
+<h1>Create Artwork</h1>
+<a href="/">← Back</a>
 
-  <!-- Tools -->
-  <div style="margin:10px 0;">
-    <label>Kleur: </label>
-    <input type="color" id="color" value="#000000">
+<div style="margin:10px 0;">
+  <label>Kleur: </label>
+  <input type="color" id="color" value="#000000" />
 
-    <label style="margin-left:10px;">Grootte: </label>
-    <input type="range" id="size" min="1" max="20" value="5">
+  <label style="margin-left:10px;">Grootte: </label>
+  <input type="range" id="size" min="1" max="20" value="5" />
 
+  <canvas id="canvas" width="600" height="400" style="border:1px solid black;"
+  ></canvas>
 
+  <button onclick="clearCanvas()" class="deletebtn">Delete</button>
+</div>
 
-  <canvas id="canvas" width="400" height="400" style="border:1px solid black;"></canvas>
-
-    <button onclick="clearCanvas()" class="deletebtn">Delete</button> 
-
-  </div>
-
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API -->
 <script>
   window.onload = function () {
-    // window.onload = functie die pas start wanneer de hele pagina klaar is met laden
-    // Dit voorkomt dat we HTML-elementen proberen te gebruiken die nog niet bestaan
+    // Wacht tot de hele pagina klaar is
 
-    // Haal het canvas-element op uit de HTML
     const canvas = document.getElementById("canvas");
 
-    // getContext("2d") betekent:
-    // we gebruiken een 2D tekenvlak (zoals papier) om lijnen en vormen te tekenen
+    // 2D tekenvlak (canvas om op te tekenen)
     const ctx = canvas.getContext("2d");
 
-    // Kleur-input (type="color")
-    // .value geeft de gekozen kleur terug als string, bv "#ff0000"
+    // gekozen kleur
     const color = document.getElementById("color");
 
-    // Grootte-slider (type="range")
-    // bepaalt de dikte van de lijn
+    // dikte van de lijn
     const size = document.getElementById("size");
 
-    // Boolean (true/false)
-    // false = niet aan het tekenen
-    // true = muis ingedrukt en we tekenen
+    // teken aan/uit
     let drawing = false;
 
-    // Opslag voor vorige muispositie
-    // We gebruiken deze om een lijn te tekenen van punt A naar punt B
+    // vorige muispositie
     let lastX = 0;
     let lastY = 0;
 
-    // Wanneer muisknop ingedrukt wordt op canvas
     canvas.onmousedown = function (e) {
-      // e = event object (informatie over de muisklik)
-
+      // Start met tekenen als je muis indrukt
       drawing = true;
 
-      // getBoundingClientRect() geeft de positie en grootte van het canvas op de pagina
       let rect = canvas.getBoundingClientRect();
 
-      // clientX = horizontale muispositie op het scherm
-      // clientY = verticale muispositie op het scherm
-      // We trekken rect.left/top eraf zodat we de positie binnen het canvas krijgen
+      // Zet startpunt van de lijn
       lastX = e.clientX - rect.left;
       lastY = e.clientY - rect.top;
     };
 
-    // Wanneer muisknop wordt losgelaten
     canvas.onmouseup = function () {
+      // Stop met tekenen als je loslaat
       drawing = false;
-      // tekenen stopt hier
     };
 
-    // Wanneer de muis beweegt
     canvas.onmousemove = function (e) {
-      // Alleen tekenen als de muisknop ingedrukt is
+      // Alleen tekenen als muis ingedrukt is
       if (drawing) {
-
         let rect = canvas.getBoundingClientRect();
 
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
 
-        // strokeStyle = kleur van de lijn
-        ctx.strokeStyle = color.value;
+        ctx.strokeStyle = color.value; // kleur van de lijn
+        ctx.lineWidth = size.value; // dikte van de lijn
 
-        // lineWidth = dikte van de lijn (in pixels)
-        ctx.lineWidth = size.value;
+        ctx.beginPath(); // start nieuwe lijn
 
-        // beginPath() = start een nieuwe tekenlijn
-        // zonder dit zouden alle lijnen aan elkaar vastzitten
-        ctx.beginPath();
+        ctx.moveTo(lastX, lastY); // beginpunt
+        ctx.lineTo(x, y); // eindpunt
 
-        // moveTo(x, y) = zet de "pen" op een startpunt zonder te tekenen
-        ctx.moveTo(lastX, lastY);
+        ctx.stroke(); // teken de lijn
 
-        // lineTo(x, y) = teken een lijn van het vorige punt naar het nieuwe punt
-        ctx.lineTo(x, y);
-
-        // stroke() = maak de lijn echt zichtbaar op het canvas
-        ctx.stroke();
-
-        // update vorige positie zodat de volgende lijn hier vanaf start
+        // update positie
         lastX = x;
         lastY = y;
       }
     };
 
-    // Functie die het canvas leeg maakt
     window.clearCanvas = function () {
-      // clearRect(x, y, width, height)
-      // wist een rechthoekig gebied op het canvas
-      // hier: het hele canvas
+      // Wist het hele canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
   };
 </script>
 
-
-
 <style>
   @font-face {
-  font-family: 'Playfair';
-  src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
-}
+    font-family: "Playfair";
+    src: url("/fonts/PlayfairDisplay-VariableFont_wght.ttf");
+  }
 
-@font-face {
-  font-family: 'Red';
-  src: url('/fonts/Redhatdisplay-VariableFont_wght.ttf');
-}
+  @font-face {
+    font-family: "Red";
+    src: url("/fonts/Redhatdisplay-VariableFont_wght.ttf");
+  }
 
-@font-face {
-  font-family: 'Script';
-  src: url('/fonts/ImperialScript-Regular.ttf');
-}
+  @font-face {
+    font-family: "Script";
+    src: url("/fonts/ImperialScript-Regular.ttf");
+  }
 
   input[type="color"] {
-    font-family: 'Red';
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: none;
-  padding: 0;
-}
+    font-family: "Red";
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+  }
 
-input[type="range"] {
-padding: 2em;
-}
+  input[type="range"] {
+    padding: 2em;
+  }
 
-/* kleur/grootte aligned */
-input[type="color"],
-input[type="range"],
-#sizeValue {
-  vertical-align: middle;
-
-}
-
+  /* kleur/grootte aligned */
+  input[type="color"],
+  input[type="range"],
+  #sizeValue {
+    vertical-align: middle;
+  }
 
   .deletebtn {
     margin-left: 10px;
@@ -174,11 +140,23 @@ input[type="range"],
     display: flex;
     align-self: center;
     justify-self: center;
-margin:2em;
-
+    margin: 2em;
   }
   .deletebtn:hover {
     transform: scale(1.1);
     background-color: #ff1a1a;
+  }
+
+  #canvas {
+    display: flex;
+    border-radius: 20px;
+    background-color: white;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    cursor: crosshair;
+
+    justify-self: center;
+    align-self: center;
   }
 </style>
