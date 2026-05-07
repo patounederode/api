@@ -1,66 +1,91 @@
 ---
+import Layout from "../layouts/Layout.astro"
 ---
-<meta charset="UTF-8" />
-<h1>Mijn Favorieten </h1>
 
-<a href="/">← Terug</a>
+<meta charset="UTF-8">
 
-<ul id="favorites-list"></ul>
+<Layout>
+  <h1>My Favorites</h1>
+  <a href="/">← Back</a>
+
+  <!-- Hier komt de lijst met favorieten -->
+  <ul id="favorites-list"></ul>
+
 
 <script>
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  // Haal favorieten op uit localStorage
+  // localStorage bewaart data in de browser (blijft bestaan na refresh)
+  // JSON.parse zet de tekst terug om naar een echte JavaScript array
+  // || [] betekent: als er niks bestaat, gebruik een lege array
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
+  // Pak het HTML-element waar we de lijst in gaan zetten
   const list = document.getElementById("favorites-list");
 
-  if (favorites.length === 0) {
-    list.innerHTML = "<p>Je hebt nog geen favorieten.</p>";
-  } 
+  // Functie om de hele lijst opnieuw te tekenen
+  // Dit gebruiken we ook na het verwijderen van een item
+  function renderFavorites() {
+    // Maak de lijst leeg voordat we opnieuw gaan tekenen
+    list.innerHTML = "";
 
-  else {
-    favorites.forEach((art) => {
+    // Check of er geen favorieten zijn
+    if (favorites.length === 0) {
+      // innerHTML = tekst/HTML in een element zetten
+list.innerHTML = "<p>You have no favorites yet.</p>";
+      return; // stop de functie hier
+    }
+
+    // Loop door alle favorieten heen
+    favorites.forEach((art, index) => {
+      // index = positie in de array (0, 1, 2, ...)
+
+      // Maak een nieuw list-item (<li>) aan
       const li = document.createElement("li");
 
+      // Zet inhoud in het <li>
+      // ${...} = template literal (variabelen in tekst plaatsen)
       li.innerHTML = `
         <h2>${art.title}</h2>
-        ${art.image ? `<img src="https://www.artic.edu/iiif/2/${art.image}/full/300,/0/default.jpg" />` : ""}
+
+        ${
+          // Als er een afbeelding is, toon die
+          // ? = "als dit waar is"
+          // : = "anders"
+          art.image
+            ? `<img src="https://www.artic.edu/iiif/2/${art.image}/full/300,/0/default.jpg" />`
+            : ""
+        }
+
+        <br />
+
+        <!-- Knop om dit specifieke item te verwijderen -->
+        <button id="delete-${index}">Verwijder</button>
       `;
 
+      // Voeg het <li> toe aan de lijst op de pagina
       list.appendChild(li);
+
+      // Pak de knop die net is aangemaakt
+      const btn = document.getElementById(`delete-${index}`);
+
+      // Wanneer je op de knop klikt
+      btn.addEventListener("click", () => {
+
+        // splice = verwijder items uit een array
+        // syntax: array.splice(startIndex, aantal)
+        // hier: verwijder 1 item op positie "index"
+        favorites.splice(index, 1);
+
+        // Sla de aangepaste array opnieuw op in localStorage
+        // JSON.stringify zet de array om naar tekst (want localStorage kan alleen tekst opslaan)
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+
+        // Teken de lijst opnieuw zodat de wijziging zichtbaar is
+        renderFavorites();
+      });
     });
   }
 
+  // Eerste keer dat de pagina laadt, toon de favorieten
+  renderFavorites();
 </script>
-
-
-<style>
-  h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    justify-self: center;
-  }
-  
-  ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  img {
-    width: 80%;
-    border-radius: 8px;
-  }
-
-  @media (max-width: 768px) {
-    ul {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

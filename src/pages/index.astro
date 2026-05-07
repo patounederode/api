@@ -2,23 +2,34 @@
 import Layout from '../layouts/Layout.astro';
 
 const response = await fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=10");
+// fetch, haalt data op 
 const data = await response.json();
+// await, wacht tot de data binnen is
+// response.json()  zet de response om naar een JavaScript object
 const artworks = data.data || [];
+// data.data → daar zitten de kunstwerken in
+// || [] → fallback: als er geen data is, gebruik een lege array om errors te voorkomen
 ---
 <meta charset="UTF-8" />
-<h1>Kunstwerken</h1>
 
-<a href="/detail">Maak kunstwerk</a>
-<a href="/favorites">Ga naar favorieten</a>
 
+<h1>Digital Art Gallery</h1>
+<p>Discover art. Save inspiration. Create your own.</p>
+
+<a href="/detail">Create Artwork</a>
+<a href="/favorites">Go to Favorites</a>
 
 
 <ul id="favorites-list">
   {artworks.map((art) => (
+    // Voor elk kunstwerk (art) maak je HTML die de titel, afbeelding en een favoriet-knop bevat
+
 <li>
-  <h2>{art.title}</h2>
+  {/* <h2>{art.title}</h2> */}
 
   {art.image_id && (
+    // de unieke ID die nodig is om de afbeelding op te halen
+    // && → alleen als art.image_id bestaat (anders niks tonen)
     <img 
       src={`https://www.artic.edu/iiif/2/${art.image_id}/full/300,/0/default.jpg`} 
       alt={art.title} 
@@ -26,90 +37,157 @@ const artworks = data.data || [];
   )}
 
   <button class="fav-btn" data-id={art.id} data-title={art.title} data-image={art.image_id}>
-     Favoriet ❤️
   </button>
 </li>
 
   ))}
+
 </ul>
 
-<!--   // JSON.stringify(object) -> object naar string
-  // JSON.parse(string) -> string naar object
- -->
 
 <script>
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  // Haalt opgeslagen favorieten op uit localStorage (browser opslag)
+  // Als er nog niets is opgeslagen, wordt een lege array gebruikt
+  let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
+  // Selecteert alle knoppen met de class "fav-btn"
   const buttons = document.querySelectorAll(".fav-btn");
 
+  // Functie die de tekst van de knop aanpast afhankelijk van status
   function updateButton(btn, isFav) {
-    btn.textContent = isFav ? "❤️ Opgeslagen" : "🤍 Favoriet";
+    if (isFav) {
+      btn.textContent = "❤️ Saved";
+    } else {
+      btn.textContent = "🤍 Favorite";
+    }
   }
 
+  // Loopt door alle favorieten knoppen heen
   buttons.forEach((btn) => {
+
+    // Haalt data op uit de HTML (data-id, data-title, data-image)
     const id = btn.dataset.id;
+    const title = btn.dataset.title;
+    const image = btn.dataset.image;
 
-    // initial state
-    const exists = favorites.find(item => item.id === id);
-    updateButton(btn, !!exists);
+    // Controleert of dit item al in de favorieten zit
+    const exists = favorites.some(item => item.id === id);
 
+    // Zet de juiste knoptekst bij het laden van de pagina
+    updateButton(btn, exists);
+
+    // Als er op de knop wordt geklikt
     btn.addEventListener("click", () => {
-      const title = btn.dataset.title;
-      const image = btn.dataset.image;
 
-      const exists = favorites.find(item => item.id === id);
+      // Opnieuw controleren of het item al bestaat
+      const exists = favorites.some(item => item.id === id);
 
       if (!exists) {
+        // Voeg item toe aan favorieten
         favorites.push({ id, title, image });
+
+        // Update knoptekst naar "Saved"
         updateButton(btn, true);
       } else {
+        // Verwijder item uit favorieten
         favorites = favorites.filter(item => item.id !== id);
+
+        // Update knoptekst naar "Favorite"
         updateButton(btn, false);
       }
 
+      // Sla de nieuwe favorietenlijst op in localStorage
       localStorage.setItem("favorites", JSON.stringify(favorites));
 
-      // animatie
+      // Voeg visuele active class toe (bijv. animatie in CSS)
       btn.classList.add("active");
-      setTimeout(() => btn.classList.remove("active"), 200);
+
+      // Verwijder de active class na 200 milliseconden
+      setTimeout(() => {
+        btn.classList.remove("active");
+      }, 200);
     });
+
+    
   });
 </script>
 
+
+
 <style>
-	html,
+
+  @font-face {
+  font-family: 'Playfair';
+  src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Red';
+  src: url(/fonts/Redhatdisplay-VariableFont_wght.ttf);
+
+}
+
+@font-face {
+  font-family: 'Script';
+  src: url('/fonts/ImperialScript-Regular.ttf');
+}
+
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+    font-family: 'Red';
+    background-color: #fff9ed;
+    color: rgb(56, 56, 56);
+    text-align: center;
+
 	}
+  p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: -1em;
+    margin-bottom: 2em;
+
+  }
 
 	h1 {
-		font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Playfair', serif;
 		display: flex;
 		justify-self: center;
+    font-size: 2.5em;
+    color: rgb(72, 139, 82);
 	}
 
   ul {
 	  font-size: 0.8em;
-	  font-family: Arial, Helvetica, sans-serif;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5em;
     list-style-type: none;
     padding: 2em;
+    justify-items: center;
   }
 
   li {
-    border: 1px solid #ddd;
+      /* background-color: rgb(221, 221, 221); */
+    border: none;
     padding: 10px;
-    border-radius: 10px;
+
+
+      &:hover {
+      transform: scale(1.05);
+      transition: all 0.2s ease;
+    }
   }
 
   img {
+
     max-width: 100%;
     display: block;
     border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  
   }
 
   button {
@@ -117,29 +195,33 @@ const artworks = data.data || [];
 	justify-self: center;
     padding:1em;
 	border-radius: 1em;
-	background-color: hsl(328, 100%, 87%);
+	background-color: #5fa069;
 	border: none;
 	margin-top: 1em;
     cursor: pointer;
+    color: white;
+     transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
-  a {
+a {
+  display: inline-block;
   padding: 1em;
-    justify-items: center;
-    align-items: center;
-    
-  }
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
 
-    a:hover {
-    color: hotpink;
-  }
+a:hover {
+  color: #5fa069;
+  font-size: 1.1em;
+}
 
 .fav-btn {
   transition: transform 0.2s ease;
 }
 
-.fav-btn.active ul{
+.fav-btn.active{
   transform: scale(1.3);
 }
-  
+
 </style>

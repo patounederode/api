@@ -1,61 +1,139 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
 
-<meta charset="UTF-8" />
+<Layout>
+  <h1>Create Artwork</h1>
+  <a href="/">← Back</a>
+
+  <!-- Tools -->
+  <div style="margin:10px 0;">
+    <label>Kleur: </label>
+    <input type="color" id="color" value="#000000">
+
+    <label style="margin-left:10px;">Grootte: </label>
+    <input type="range" id="size" min="1" max="20" value="5">
 
 
-<h1>Maak zelf een kunstwerk</h1>
-<a href="/">← Terug</a>
 
+  <canvas id="canvas" width="400" height="400" style="border:1px solid black;"></canvas>
 
-<p></p>
+    <button onclick="clearCanvas()" class="deletebtn">Delete</button> 
 
-<canvas id="canvas" width="300" height="300" style="border:1px solid black;"></canvas>
-
-<button onclick="ctx.clearRect(0, 0, canvas.width, canvas.height)">
-  Wis tekening
-</button>
-
+  </div>
 <script>
-  // @ts-nocheck
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
+  window.onload = function () {
+    // window.onload = functie die pas start wanneer de hele pagina klaar is met laden
+    // Dit voorkomt dat we HTML-elementen proberen te gebruiken die nog niet bestaan
 
-  let drawing = false;
+    // Haal het canvas-element op uit de HTML
+    const canvas = document.getElementById("canvas");
 
-  canvas.addEventListener('mousedown', () => drawing = true);
-  canvas.addEventListener('mouseup', () => drawing = false);
+    // getContext("2d") betekent:
+    // we gebruiken een 2D tekenvlak (zoals papier) om lijnen en vormen te tekenen
+    const ctx = canvas.getContext("2d");
 
-  canvas.addEventListener('mousemove', (e) => {
-    if (!drawing) return;
+    // Kleur-input (type="color")
+    // .value geeft de gekozen kleur terug als string, bv "#ff0000"
+    const color = document.getElementById("color");
 
-    const rect = canvas.getBoundingClientRect();
-    ctx.fillRect(e.clientX - rect.left, e.clientY - rect.top, 4, 4);
-  });
+    // Grootte-slider (type="range")
+    // bepaalt de dikte van de lijn
+    const size = document.getElementById("size");
+
+    // Boolean (true/false)
+    // false = niet aan het tekenen
+    // true = muis ingedrukt en we tekenen
+    let drawing = false;
+
+    // Opslag voor vorige muispositie
+    // We gebruiken deze om een lijn te tekenen van punt A naar punt B
+    let lastX = 0;
+    let lastY = 0;
+
+    // Wanneer muisknop ingedrukt wordt op canvas
+    canvas.onmousedown = function (e) {
+      // e = event object (informatie over de muisklik)
+
+      drawing = true;
+
+      // getBoundingClientRect() geeft de positie en grootte van het canvas op de pagina
+      let rect = canvas.getBoundingClientRect();
+
+      // clientX = horizontale muispositie op het scherm
+      // clientY = verticale muispositie op het scherm
+      // We trekken rect.left/top eraf zodat we de positie binnen het canvas krijgen
+      lastX = e.clientX - rect.left;
+      lastY = e.clientY - rect.top;
+    };
+
+    // Wanneer muisknop wordt losgelaten
+    canvas.onmouseup = function () {
+      drawing = false;
+      // tekenen stopt hier
+    };
+
+    // Wanneer de muis beweegt
+    canvas.onmousemove = function (e) {
+      // Alleen tekenen als de muisknop ingedrukt is
+      if (drawing) {
+
+        let rect = canvas.getBoundingClientRect();
+
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+
+        // strokeStyle = kleur van de lijn
+        ctx.strokeStyle = color.value;
+
+        // lineWidth = dikte van de lijn (in pixels)
+        ctx.lineWidth = size.value;
+
+        // beginPath() = start een nieuwe tekenlijn
+        // zonder dit zouden alle lijnen aan elkaar vastzitten
+        ctx.beginPath();
+
+        // moveTo(x, y) = zet de "pen" op een startpunt zonder te tekenen
+        ctx.moveTo(lastX, lastY);
+
+        // lineTo(x, y) = teken een lijn van het vorige punt naar het nieuwe punt
+        ctx.lineTo(x, y);
+
+        // stroke() = maak de lijn echt zichtbaar op het canvas
+        ctx.stroke();
+
+        // update vorige positie zodat de volgende lijn hier vanaf start
+        lastX = x;
+        lastY = y;
+      }
+    };
+
+    // Functie die het canvas leeg maakt
+    window.clearCanvas = function () {
+      // clearRect(x, y, width, height)
+      // wist een rechthoekig gebied op het canvas
+      // hier: het hele canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+  };
 </script>
 
+</Layout>
 
 <style>
-    h1 {
-        font-family: Arial, Helvetica, sans-serif;
-        display: flex;
-        justify-self: center;
-    }
-    canvas {
-        margin-top: 1em;
-        border-radius: 8px;
-        display: flex;
-        justify-self: center;
-    }
+  
+  .deletebtn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 
-    button {
-        display: flex;
-        justify-self: center;
-        padding:1em;
-        border-radius: 1em;
-        background-color: hsl(328, 100%, 87%);
-        border: none;
-        margin-top: 1em;
-        cursor: pointer;
-    }
+  }
+  .deletebtn:hover {
+    transform: scale(1.1);
+    background-color: #ff1a1a;
+  }
 </style>

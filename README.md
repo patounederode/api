@@ -35,10 +35,16 @@ Styling grid gedaan
 
 ## Vrij 17 april
 The web you want
-Verslag:
-
 
 # WEEk 4
 
 ## Wo 22 april
-Werk besproken, mijn idee moet nog aangepast worden, creatief, hulp gekregen met code. Ik loop nog achter, ik ga ook hulp vragen aan andere studenten.
+Werk besproken, mijn idee moet nog aangepast worden, creatiever, hulp gekregen met code van Jad. Ik loop nog iets achter, ik ga ook hulp vragen aan andere studenten.
+
+Bronnen:
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+
+Jad:
+<!--   // JSON.stringify(object) -> object naar string
+  // JSON.parse(string) -> string naar object
+ -->
