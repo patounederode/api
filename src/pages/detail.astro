@@ -23,8 +23,10 @@ import Layout from "../layouts/Layout.astro";
 </div>
 </Layout>
 
-
+<!-- Chatgpt -->
 <!-- https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API -->
+ <!-- https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event -->
+  <!-- ctx - context, pen waarmee je tekent  -->
 <script>
   window.onload = function () {
     // Wacht tot de hele pagina klaar is
@@ -43,15 +45,18 @@ import Layout from "../layouts/Layout.astro";
     // teken aan/uit
     let drawing = false;
 
-    // vorige muispositie
+    // bewaart positie van de muis, nodig om een lijn te maken
     let lastX = 0;
     let lastY = 0;
 
     canvas.onmousedown = function (e) {
       // Start met tekenen als je muis indrukt
+      //  e is event, waar de muis is
       drawing = true;
 
       let rect = canvas.getBoundingClientRect();
+      // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+      // Dit vraagt: Waar staat het canvas op de pagina
 
       // Zet startpunt van de lijn
       lastX = e.clientX - rect.left;

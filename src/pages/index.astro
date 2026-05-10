@@ -28,9 +28,10 @@ const artworks = data.data || [];
 
       <li>
         <a
-          href={`https://www.artic.edu/artworks/${art.id}`}
+          href={`/${art.id}`}
           target="_blank"
           rel="noopener noreferrer"
+          // veilig de link openen
         >
           {art.image_id && (
             <img
@@ -56,6 +57,7 @@ const artworks = data.data || [];
 
 
 <script>
+  // chatgpt
   // Haalt opgeslagen favorieten op uit localStorage, ls er nog niets is opgeslagen, wordt een lege array gebruikt
   let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
@@ -71,15 +73,16 @@ const artworks = data.data || [];
     }
   }
 
-  // Loopt door alle favorieten knoppen heen
+  // Loopt door alle favorieten button heen
   buttons.forEach((btn) => {
     // Haalt data op (data-id, data-title, data-image)
     const id = btn.dataset.id;
     const title = btn.dataset.title;
     const image = btn.dataset.image;
 
-    // Checkt of item al in favorieten zit
+    // Checkt of item al in favorieten zit, is de id hetzelde?
     const exists = favorites.some((item) => item.id === id);
+
 
     // Zet de juiste tekst bij de knop, afhankelijk van of het item al in favorieten zit
     updateButton(btn, exists);

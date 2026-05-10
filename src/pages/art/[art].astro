@@ -1,5 +1,9 @@
 ---
 const art = Astro.params.art;
+const response = await fetch(
+  "https://api.artic.edu/api/v1/artworks/" + art
+);
+
 ---
 
 <h1>Art {art}</h1>

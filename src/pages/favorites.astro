@@ -7,7 +7,7 @@ import Layout from "../layouts/Layout.astro";
 <h1>My Favorites</h1>
 <a href="/">← Back</a>
 
-<!-- Hier komt de lijst met favorieten -->
+
 <ul id="favorites-list"></ul>
 
 
@@ -15,6 +15,7 @@ import Layout from "../layouts/Layout.astro";
 
 
 <script>
+  // chatgpt
   // Haal favorieten op uit localStorage
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
@@ -68,7 +69,7 @@ import Layout from "../layouts/Layout.astro";
         // Slaat de nieuwe lijst op in localStorage
         localStorage.setItem("favorites", JSON.stringify(favorites));
 
-        // Laat de lijst opnieuw zien
+        // Laat de lijst zien
         renderFavorites();
       });
     });
