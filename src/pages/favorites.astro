@@ -10,8 +10,7 @@ import Layout from "../layouts/Layout.astro";
 
 <ul id="favorites-list"></ul>
 
-
-
+<Layout>
 
 
 <script>
@@ -53,7 +52,7 @@ import Layout from "../layouts/Layout.astro";
 
   <br />
 
-  <button id="delete-${index}">Verwijder</button>
+  <button id="delete-${index}">Delete</button>
 `;
 
       // Zet het item op de pagina
@@ -165,3 +164,4 @@ import Layout from "../layouts/Layout.astro";
     }
   }
 </style>
+</Layout>
