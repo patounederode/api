@@ -199,8 +199,10 @@ Als ik terugkijk heb ik vooral geleerd dat ik het pas echt ga begrijpen als ik h
 Omdat ik nog geen eigen detailpagina per schilderij heb ik deze aangemaakt, en op dezelfde manier gestyled als de rest van de app.
 Op de pagina zie je de titel, afbeelding van het kunstwerk, kunstenaar en jaartal, andere details, hoe is dit kunstwerk gemaakt (medium), afmetingen en herkomst. Onderaan zie je info over de kunstenaar. En een link terug naar de overzichtspagina.
 Ik wilde graag een tekst laten zien over het schilderij maar deze was niet beschikbaar. Dus heb ik gekozen voor informatie over de artist zelf.
+
 ![](/src/img/detailpagina.png)
 
+Code:
 ```javascript
 <Layout>
   <!-- titel -->
