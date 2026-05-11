@@ -212,7 +212,7 @@ Dus heb ik gekozen dat je informatie kan lezen de artist zelf (als deze beschikb
 
 ![Detailpagina:](/src/img/detailpagina.png)
 
-Code:
+Code [art].astro:
 ```javascript
 <Layout>
   <!-- titel -->
