@@ -118,6 +118,7 @@ The Web You Want – inspiratie
 Deze week ben ik begonnen met mijn nieuwe idee. Het werken met de API vond ik best lastig, vooral omdat de Rijksmuseum API niet werkte. Daarom heb ik een andere API gekozen. Ook vond ik het moeilijk om de code helemaal te begrijpen.
 Maar met hulp van klasgenoten en Chatgpt is het gelukt.
 
+
 # WEEK 4
 
 ## Wo 22 april
@@ -127,7 +128,9 @@ Mijn werk heb ik besproken met Jad, mijn idee moet nog aangepast worden, het mag
 Tijdens het voorgang gesprek heb ik mijn nieuwe concept uitgelegd, een kunstapp met een pagina waar je schilderijen kunt bekijken voor inspiratie, en opslaan in je favorieten, een detailpagina voor elk schilderij en een pagina waarop je zelf digitaal je eigen kunstwerk kan maken. Dit concept was voldoende, alleen werd al snel duidelijk dat mijn door vooral is om mijn code te gaan begrijpen in plaats van alleen kopiëren. Daarna pas styling verbeteren.
 
 # Wo 7 mei
-Mijn site online gezet via render. Ik heb het zelf geprobeerd, maar het online zetten gaf veel errors waar ik zelf niet uit kwam, Jad heeft mij geholpen deze errors te fixen. Vandaag en morgen wil ik gebruiken om mijn code te gaan begrijpen, notities maken. En voor zover het lukt extra css toe te passen.
+Mijn site online gezet via render. Ik heb het zelf geprobeerd, maar het online zetten gaf veel errors waar ik zelf niet uit kwam, Jad heeft mij geholpen deze errors te fixen. 
+![](/src/img/render.png)
+Vandaag en morgen wil ik gebruiken om mijn code te gaan begrijpen, notities maken. En voor zover het lukt extra css toe te passen.
 
 # Do 8 mei (deadline)
 Vandaag heb ik extra styling toegepast, lettertypes, kleuren en de buttons aangepast:
@@ -189,6 +192,55 @@ Ik vond het best lastig om de code echt te begrijpen, vooral het werken met Astr
 Uiteindelijk ging dat wel steeds beter. Door het vaak terug te kijken en notities te maken begon ik het iets meer te begrijpen. Code zelf schrijven blijft lastig maar het toepassen lukt nu iets beter.
 
 Als ik terugkijk heb ik vooral geleerd dat ik het pas echt ga begrijpen als ik hulp vraag van anderen en dat de achterstand  aan het begin van deze weken, het extra moeilijk heeft gemaakt, maar dat ik het uiteindelijk wel zoveel mogelijk heb kunnen inhalen.
+
+
+
+# Herkansing
+Omdat ik nog geen eigen detailpagina per schilderij heb ik deze aangemaakt, en op dezelfde manier gestyled als de rest van de app.
+Op de pagina zie je de titel, afbeelding van het kunstwerk, kunstenaar en jaartal, andere details, hoe is dit kunstwerk gemaakt (medium), afmetingen en herkomst. Onderaan zie je info over de kunstenaar. En een link terug naar de overzichtspagina.
+Ik wilde graag een tekst laten zien over het schilderij maar deze was niet beschikbaar. Dus heb ik gekozen voor informatie over de artist zelf.
+![](/src/img/detailpagina.png)
+
+```javascript
+<Layout>
+  <!-- titel -->
+  <h1>{artwork.title}</h1>
+
+  <a href="/">← Back to all artworks</a>
+
+    <!-- naam artist -->
+  <h2>{artwork.artist_title}</h2>
+
+  <!--  informatie over de artist --> 
+  {artwork.artist_display && (
+    <section>
+      <p>{artwork.artist_display}</p>
+    </section>
+  )}
+  
+<!-- afbeelding kunstwerk -->
+  {artwork.image_id && (
+    <img
+      src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/800,/0/default.jpg`}
+      alt={`Artwork titled ${artwork.title} by ${artwork.artist_title}`}
+    />
+  )}
+  
+    <!-- datum -->
+  <h3>Date ({artwork.date_display})</h2>
+
+
+<!-- info over het kunstwerk -->
+  <ul>
+    <li><strong>Medium:</strong> {artwork.medium_display}</li>
+    <li><strong>Dimensions:</strong> {artwork.dimensions}</li>
+    <li><strong>Origin:</strong> {artwork.place_of_origin}</li>
+  </ul>
+
+</Layout>
+```
+
+
 
 Bronnen:
 - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
