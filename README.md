@@ -38,7 +38,6 @@ Daarom heb ik een andere api gekozen, de Artic.edu API.
 
 Ook heb ik een pagina aangemaakt waarin je favorieten kunt opslaan met behulp van local storage. Hiervoor heb ik hulp gekregen van ChatGPT.
 
-
 Deze code zorgt ervoor dat items op de pagina worden weergegeven en dat je ze kunt verwijderen.  
 Wanneer je een item verwijdert, wordt de lijst meteen bijgewerkt in de browser via localStorage.
 
@@ -62,9 +61,54 @@ btn.addEventListener("click", () => {
 ```
 
 ## do 16 april
-Ik heb vandaag gewerkt aan de styling van de pagina's zodat de kunstwerken netjes naast elkaar staan met grid, en het er beter uit ziet.
-![Grid](/src/img/grid.png)
+Vandaag heb ik Canvas api gebruikt. Met behulp van mdn:
+https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+```html
+<canvas id="canvas" width="600" height="400" style="border:1px solid black;"></canvas>
+```
+Hiermee kon ik aangeven hoe groot mijn canvas moet zijn en de randen bepalen.
+```html
+ <label>Color: </label>
+  <input type="color" id="color" value="#000000" />
 
+  <label style="margin-left:10px;">Size: </label>
+  <input type="range" id="size" min="1" max="20" value="5" />
+
+  <button onclick="clearCanvas()" class="deletebtn">Delete</button>
+  ```
+Ook heb ik twee labels toegevoegd, color en range, zodat je kunt kiezen welke kleur je wilt gebruiken en de grootte van de pen/brush.
+En een button toegevoegd om je kunstwerk te verwijderen.
+
+```javascript
+  window.clearCanvas = function () {
+      // Wist het kunstwerk van je canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+```
+
+
+De functie getBoundingClientrect() begreep ik niet, deze functie zegt dus "hier zit het mijn canvas op de pagina, zodat je muis of podloot er correct op kan tekenen.
+```javascript
+
+    canvas.onmousedown = function (e) {
+      // Start met tekenen als je muis indrukt
+      //  e is event, waar de muis is
+      drawing = true;
+
+      let rect = canvas.getBoundingClientRect();
+      // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+      // Dit vraagt: Waar staat het canvas op de pagina
+
+      // Zet startpunt van de lijn, gebruikt om de positie van de muis op het canvas zelf te berekenen:
+      lastX = e.clientX - rect.left;
+      lastY = e.clientY - rect.top;
+    };
+```
+Als je dit niet gebruikt tekent je muis niet op het juiste punt op het canvas:
+![Trekt een lijn vanuit linksboven](/src/img/voorbeeld.png)
+
+Ook heb ik vandaag gewerkt aan de styling van de pagina's zodat de kunstwerken netjes naast elkaar staan met grid, en het er beter uit ziet.
+![Grid](/src/img/grid.png)
 
 ## Vrij 17 april
 The Web You Want – inspiratie
@@ -79,8 +123,7 @@ Maar met hulp van klasgenoten en Chatgpt is het gelukt.
 Mijn werk heb ik besproken met Jad, mijn idee moet nog aangepast worden, het mag iets creatiever. Hij heeft me ook geholpen met code, hij zei zelf dat het te veel werd om allemaal in één keer uit te leggen daarom ben van plan klasgenoten om hulp te vragen. Dit om mijn achterstand in te halen, en te zorgen dat ik mijn code begrijp.
 
 ## Vrij 24 april 
-Tijdens het voorgang gesprek heb ik mijn nieuwe concept uitgelegd, een kunstapp met een pagina waar je schilderijen kunt bekijken voor inspiratie, en opslaan in je favorieten, een detailpagina voor elk schilderij en een pagina waarop je zelf digitaal je eigen kunstwerk kan maken. Dit concept was voldoende, alleen werd al snel duidelijk dat mijn door vooral is om mijn code te gaan begrijpen in plaats van alleen kopiëren.
-Daarna pas styling verbeteren.
+Tijdens het voorgang gesprek heb ik mijn nieuwe concept uitgelegd, een kunstapp met een pagina waar je schilderijen kunt bekijken voor inspiratie, en opslaan in je favorieten, een detailpagina voor elk schilderij en een pagina waarop je zelf digitaal je eigen kunstwerk kan maken. Dit concept was voldoende, alleen werd al snel duidelijk dat mijn door vooral is om mijn code te gaan begrijpen in plaats van alleen kopiëren. Daarna pas styling verbeteren.
 
 # Wo 7 mei
 Mijn site online gezet via render. Ik heb het zelf geprobeerd, maar het online zetten gaf veel errors waar ik zelf niet uit kwam, Jad heeft mij geholpen deze errors te fixen. Vandaag en morgen wil ik gebruiken om mijn code te gaan begrijpen, notities maken. En voor zover het lukt extra css toe te passen.
