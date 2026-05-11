@@ -6,7 +6,7 @@ Mijn eerste idee: een film app met de MovieDB API. Ik wilde daarbij gebruik make
 Voortgangsgesprek
 Mijn idee bleek te simpel en te saai, nieuw idee bedenken.
 Ik moest opnieuw nadenken over mijn concept en wat ik precies wilde maken. Daarna ben ik gaan kijken naar de lijst met API's https://developer.mozilla.org/en-US/docs/Web/API. Omdat ik toch graag iets met kunst wilde doen heb besloten  zelf de API van het rijksmuseum op de te zoeken. 
-!alt[](/src/img/rijksmuseumapi.png)
+![Rijksmuseum api](/src/img/rijksmuseumapi.png)
 
 ## Vrij 3 april
 Goede vrijdag
@@ -30,8 +30,8 @@ Deze week was ik ziek, dus heb ik niks kunnen doen aan mijn project. Daardoor li
 # WEEK 3
 ## wo 15 april
 Ik ben begonnen met mijn nieuwe idee: een kunstapp. Ik wilde kunstwerken ophalen via een API, een favorietenpagina maken en detailpagina’s voor elk kunstwerk toevoegen. Mijn eerste poging was de Rijksmuseum API, maar die werkte helaas niet meer.
-!alt[Testen of api werkt](/src/img/testapi.png)
-!alt[Niet gevonden](/src/img/verwijderd.png)
+![Testen of api werkt](/src/img/testapi.png)
+![Niet gevonden](/src/img/verwijderd.png)
 
 Daarom heb ik een andere api gekozen, de Artic.edu API. 
 !alt[](/src/img/chicagoapi.png)
@@ -63,7 +63,7 @@ btn.addEventListener("click", () => {
 
 ## do 16 april
 Ik heb vandaag gewerkt aan de styling van de pagina's zodat de kunstwerken netjes naast elkaar staan met grid, en het er beter uit ziet.
-!alt[Grid](/src/img/grid.png)
+![Grid](/src/img/grid.png)
 
 
 ## Vrij 17 april
@@ -87,7 +87,7 @@ Mijn site online gezet via render. Ik heb het zelf geprobeerd, maar het online z
 
 # Do 8 mei (deadline)
 Vandaag heb ik extra styling toegepast, lettertypes, kleuren en de buttons aangepast:
-!alt[](/src/img/Stylingtoegepast.png).
+![Styling toegepast](/src/img/Stylingtoegepast.png).
 Mijn code doorgelopen en notities gemaakt erbij gezet in mijn code:
 ```javascript
  window.onload = function () {
@@ -129,9 +129,9 @@ Mijn code doorgelopen en notities gemaakt erbij gezet in mijn code:
 
 # Reflectie week 4:
 Deze week heb ik feedback gekregen dat mijn project nog beter kon. Ik liep nog wat achter en heb daarom hulp gevraagd aan klasgenoten, jad en Chatgpt. Mijn doel werd vooral om mijn code beter te begrijpen voor mijn Eindbeoordeling, inplaats van alleen dingen laten werken. Dit was veel werk, maar ik ben wel blij dat alles uiteindelijk online staat en werkt. 
-!alt[Home pagina](/src/img/homepage.png)
-!alt[Favorites pagina](/src/img/favoritespagina.png)
-!alt[Create artwork pagina](/src/img/createartwork.png)
+![Home pagina](/src/img/homepage.png)
+![Favorites pagina](/src/img/favoritespagina.png)
+![Create artwork pagina](/src/img/createartwork.png)
 
 
 # Eindreflectie
