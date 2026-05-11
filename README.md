@@ -63,6 +63,7 @@ btn.addEventListener("click", () => {
 ## do 16 april
 Vandaag heb ik Canvas api gebruikt. Met behulp van mdn:
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+
 ```html
 <canvas id="canvas" width="600" height="400" style="border:1px solid black;"></canvas>
 ```
@@ -75,7 +76,7 @@ Hiermee kon ik aangeven hoe groot mijn canvas moet zijn en de randen bepalen.
   <input type="range" id="size" min="1" max="20" value="5" />
 
   <button onclick="clearCanvas()" class="deletebtn">Delete</button>
-  ```
+```
 Ook heb ik twee labels toegevoegd, color en range, zodat je kunt kiezen welke kleur je wilt gebruiken en de grootte van de pen/brush.
 En een button toegevoegd om je kunstwerk te verwijderen.
 
@@ -167,7 +168,7 @@ Mijn code doorgelopen en notities gemaakt erbij gezet in mijn code:
       lastX = e.clientX - rect.left;
       lastY = e.clientY - rect.top;
     };
-    ```
+```
 
 
 # Reflectie week 4:
