@@ -1,21 +1,18 @@
 # Week 1
 ## wo 1 april
-Eerste idee:
-Een film app met MovieDB API en gebruik Page Transition en Web Share API.
-Ik heb wat onderzoek gedaan naar de API en hoe ik die zou kunnen gebruiken.
+Mijn eerste idee: een film app met de MovieDB API. Ik wilde daarbij gebruik maken van paginaovergangen en de Web Share API. Ik heb gekeken naar voorbeelden op DLO
 
 ## Do 2 april
 Voortgangsgesprek
 Mijn idee bleek te simpel en te saai, nieuw idee bedenken.
-Waarschijnlijk iets met kunst/rijksmuseum.
-Ik moest opnieuw nadenken over mijn concept en wat ik precies wilde maken.
+Ik moest opnieuw nadenken over mijn concept en wat ik precies wilde maken. Daarna ben ik gaan kijken naar de lijst met API's https://developer.mozilla.org/en-US/docs/Web/API. Omdat ik toch graag iets met kunst wilde doen heb besloten  zelf de API van het rijksmuseum op de te zoeken. 
+!alt[](/src/img/rijksmuseumapi.png)
 
 ## Vrij 3 april
 Goede vrijdag
 
 # Reflectie week 1:
-In deze week ben ik begonnen met mijn eerste idee, maar ik kreeg feedback dat het te simpel was. Daardoor moest ik opnieuw nadenken over wat ik ging maken. Uiteindelijk heb ik gekozen om iets met kunst te doen, wat beter bij mij past.
-
+In deze week ben ik begonnen met mijn eerste idee, maar ik kreeg tijdens de feedback dat het te simpel was. Daardoor moest ik opnieuw nadenken over wat ik ging maken. Uiteindelijk heb ik gekozen om iets met kunst te doen, wat beter bij mij past.
 
 # Week 2
 ## wo 8 april
@@ -32,41 +29,109 @@ Deze week was ik ziek, dus heb ik niks kunnen doen aan mijn project. Daardoor li
 
 # WEEK 3
 ## wo 15 april
-Nieuwe idee, kunst api ophalen, favorieten pagina en detail pagina.
+Ik ben begonnen met mijn nieuwe idee: een kunstapp. Ik wilde kunstwerken ophalen via een API, een favorietenpagina maken en detailpagina’s voor elk kunstwerk toevoegen. Mijn eerste poging was de Rijksmuseum API, maar die werkte helaas niet meer.
+!alt[Testen of api werkt](/src/img/testapi.png)
+!alt[Niet gevonden](/src/img/verwijderd.png)
 
-Ik had geprobeerd de api van het rijksmuseum op te halen, deze werkte helaas niet meer.
-Ik heb inplaats daarvan kunstwerken van artic.edu opgehaald. Ook heb ik een pagina aangemaakt waarin je favorieten kunt opslaan. Met hulp van chatgpt.
+Daarom heb ik een andere api gekozen, de Artic.edu API. 
+!alt[](/src/img/chicagoapi.png)
+
+Ook heb ik een pagina aangemaakt waarin je favorieten kunt opslaan met behulp van local storage. Hiervoor heb ik hulp gekregen van ChatGPT.
+
+
+Deze code zorgt ervoor dat items op de pagina worden weergegeven en dat je ze kunt verwijderen.  
+Wanneer je een item verwijdert, wordt de lijst meteen bijgewerkt in de browser via localStorage.
+
+```javascript
+// Zet het item op de pagina
+list.appendChild(li);
+
+const btn = document.getElementById(`delete-${index}`);
+
+// Als je op de knop klikt:
+btn.addEventListener("click", () => {
+  // Verwijder 1 item op deze plek
+  favorites.splice(index, 1);
+
+  // Slaat de nieuwe lijst op in localStorage
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+
+  // Laat de lijst zien
+  renderFavorites();
+});
+```
 
 ## do 16 april
-Styling grid gedaan.
-Ik heb gewerkt aan de layout zodat de kunstwerken netjes naast elkaar staan.
+Ik heb vandaag gewerkt aan de styling van de pagina's zodat de kunstwerken netjes naast elkaar staan met grid, en het er beter uit ziet.
+!alt[Grid](/src/img/grid.png)
+
 
 ## Vrij 17 april
 The Web You Want – inspiratie
 
 # Reflectie week 3:
-In deze week ben ik echt begonnen met mijn nieuwe project. Het werken met de API vond ik best lastig, vooral omdat de Rijksmuseum API niet werkte. Daarom heb ik een andere API gekozen.Ook vond ik het moeilijk om de code goed te begrijpen.
+Deze week ben ik begonnen met mijn nieuwe idee. Het werken met de API vond ik best lastig, vooral omdat de Rijksmuseum API niet werkte. Daarom heb ik een andere API gekozen. Ook vond ik het moeilijk om de code helemaal te begrijpen.
+Maar met hulp van klasgenoten en Chatgpt is het gelukt.
 
 # WEEK 4
 
 ## Wo 22 april
-Werk besproken, mijn idee moet nog aangepast worden, creatiever, hulp gekregen met code van Jad. Ik loop nog iets achter, ik ga ook hulp vragen aan andere studenten.
+Mijn werk heb ik besproken met Jad, mijn idee moet nog aangepast worden, het mag iets creatiever. Hij heeft me ook geholpen met code, hij zei zelf dat het te veel werd om allemaal in één keer uit te leggen daarom ben van plan klasgenoten om hulp te vragen. Dit om mijn achterstand in te halen, en te zorgen dat ik mijn code begrijp.
 
 ## Vrij 24 april 
-Voortgangsgesprek.
-Concept uitgelegd, en dat was voldoende.
-Mijn doel werd vooral om mijn code echt te begrijpen in plaats van alleen kopiëren.
+Tijdens het voorgang gesprek heb ik mijn nieuwe concept uitgelegd, een kunstapp met een pagina waar je schilderijen kunt bekijken voor inspiratie, en opslaan in je favorieten, een detailpagina voor elk schilderij en een pagina waarop je zelf digitaal je eigen kunstwerk kan maken. Dit concept was voldoende, alleen werd al snel duidelijk dat mijn door vooral is om mijn code te gaan begrijpen in plaats van alleen kopiëren.
 Daarna pas styling verbeteren.
 
 # Wo 7 mei
-Mijn site online gezet via render, met behulp van Jad.
-Vandaag en morgen mijn code gaan begrijpen, notities maken.
+Mijn site online gezet via render. Ik heb het zelf geprobeerd, maar het online zetten gaf veel errors waar ik zelf niet uit kwam, Jad heeft mij geholpen deze errors te fixen. Vandaag en morgen wil ik gebruiken om mijn code te gaan begrijpen, notities maken. En voor zover het lukt extra css toe te passen.
 
 # Do 8 mei (deadline)
-Styling toepassen, code ordenen, notities maken voor beoordeling. Readme aanvullen. Reflectie schrijven.
+Vandaag heb ik extra styling toegepast, lettertypes, kleuren en de buttons aangepast:
+!alt[](/src/img/Stylingtoegepast.png).
+Mijn code doorgelopen en notities gemaakt erbij gezet in mijn code:
+```javascript
+ window.onload = function () {
+    // Wacht tot de hele pagina klaar is
+
+    const canvas = document.getElementById("canvas");
+
+    // 2D tekenvlak (canvas om op te tekenen)
+    const ctx = canvas.getContext("2d");
+
+    // gekozen kleur
+    const color = document.getElementById("color");
+
+    // dikte van de lijn
+    const size = document.getElementById("size");
+
+    // teken aan/uit
+    let drawing = false;
+
+    // bewaart positie van de muis, nodig om een lijn te maken
+    let lastX = 0;
+    let lastY = 0;
+
+    canvas.onmousedown = function (e) {
+      // Start met tekenen als je muis indrukt
+      //  e is event, waar de muis is
+      drawing = true;
+
+      let rect = canvas.getBoundingClientRect();
+      // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+      // Dit vraagt: Waar staat het canvas op de pagina
+
+      // Zet startpunt van de lijn
+      lastX = e.clientX - rect.left;
+      lastY = e.clientY - rect.top;
+    };
+    ```
+
 
 # Reflectie week 4:
-Deze week heb ik feedback gekregen dat mijn project nog beter kon. Ik liep nog wat achter en heb daarom hulp gevraagd. Mijn doel werd vooral om mijn code beter te begrijpen in plaats van alleen dingen laten werken. Dit was veel werk, maar ik ben wel blij dat alles uiteindelijk online staat en werkt.
+Deze week heb ik feedback gekregen dat mijn project nog beter kon. Ik liep nog wat achter en heb daarom hulp gevraagd aan klasgenoten, jad en Chatgpt. Mijn doel werd vooral om mijn code beter te begrijpen voor mijn Eindbeoordeling, inplaats van alleen dingen laten werken. Dit was veel werk, maar ik ben wel blij dat alles uiteindelijk online staat en werkt. 
+!alt[Home pagina](/src/img/homepage.png)
+!alt[Favorites pagina](/src/img/favoritespagina.png)
+!alt[Create artwork pagina](/src/img/createartwork.png)
 
 
 # Eindreflectie
@@ -83,9 +148,9 @@ Als ik terugkijk heb ik vooral geleerd dat ik het pas echt ga begrijpen als ik h
 
 Bronnen:
 - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+- https://api.artic.edu/docs/#quick-start
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 - https://docs.astro.build/en/basics/layouts/
-- https://www.youtube.com/watch?v=mK5VBYLpUYw
 - https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
 - https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors
@@ -93,8 +158,7 @@ Bronnen:
 - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event
 - https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
 - ChatGPT
-
-Jad:
+- Jad
 <!--   // JSON.stringify(object) -> object naar string
   // JSON.parse(string) -> string naar object
  -->
