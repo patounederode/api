@@ -196,16 +196,15 @@ Als ik terugkijk heb ik vooral geleerd dat ik het pas echt ga begrijpen als ik h
 
 
 # Herkansing
-Omdat ik nog geen eigen detailpagina per schilderij heb ik deze aangemaakt, en op dezelfde manier gestyled als de rest van de app.
-Op de pagina zie je de titel, afbeelding van het kunstwerk, kunstenaar en jaartal, andere details, hoe is dit kunstwerk gemaakt (medium), afmetingen en herkomst. Onderaan zie je info over de kunstenaar. En een link terug naar de overzichtspagina.
-Ik wilde graag een tekst laten zien over het schilderij. Ik heb deze geprobeerd (chatgpt):
+Voor de herkansing heb ik een detailpagina aangemaakt voor elk schilderij/kunstwerk, en op dezelfde manier gestyled als de rest van de app. Op de detailpagina kun je de titel van het kunstwerk zien, de afbeelding, de naam van de kunstenaar, het jaartal, en andere details zoals het medium, de afmetingen en de herkomst. Onderaan staat informatie over de kunstenaar en er is een link terug naar de overzichtspagina.
+
+Ik wilde ook graag een korte tekst over het schilderij laten zien, zoals de beschrijving, alternatieve tekst of herkomst:
 ```javascript
 {artwork.discription}
 {artwork.thumbnail?.alt_text}
 {artwork.provenance_text}
 ```
-Maar deze waren niet beschikbaar
-Dus heb ik gekozen dat je informatie kan lezen de artist zelf (als deze beschikbaar is). 
+Helaas waren deze gegevens niet altijd beschikbaar in de API. Daarom heb ik ervoor gekozen om in plaats daarvan informatie over de kunstenaar weer te geven (als deze beschikbaar is):
 ```javascript
 {artwork.artist_display}
 ```
